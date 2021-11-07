@@ -10,7 +10,7 @@
     "
   >
     <div class="lg:justify-between justify-end flex w-full">
-      <IssuesStats 
+      <IssuesStats
         class="lg:flex hidden lg:w-1/2"
         @getIssues="getIssues"
         :openedIssues="openedIssues"

@@ -105,7 +105,10 @@
 </template>
 <script>
 export default {
-  props: ["page", "totalPages"],
+  props: {
+    page: Number,
+    totalPages: Number,
+  },
   data() {
     return {
       maxVisibleButtons: 5,

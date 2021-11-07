@@ -14,7 +14,7 @@ import { mapState } from "vuex";
 import State from "./Table/State.vue";
 export default {
   props: {
-    id: [Number, String],
+    id: [Number],
   },
   components: { State },
   data() {

@@ -5,6 +5,7 @@
         <State :issue="issue" />
         <span
           ><router-link
+            id="link"
             :to="{ name: 'oneIssue', params: { id: issue.number } }"
             class="
               text-base

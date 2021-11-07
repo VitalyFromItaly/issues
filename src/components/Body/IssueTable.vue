@@ -1,8 +1,8 @@
 <template>
   <div class="my-10" v-if="!issuesLoading">
-    <div class="flex space-x-5 lg:space-x-0  items-baseline">
+    <div class="flex space-x-5 lg:space-x-0 items-baseline">
       <IssuesStats
-        class="block lg:hidden  text-gray-500"
+        class="block lg:hidden text-gray-500"
         @getIssues="getIssues"
         :openedIssues="openedIssues"
         :closedIssues="closedIssues"
@@ -90,11 +90,14 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.getIssues();
+    this.$store.dispatch("getIssueAmount");
+  },
   methods: {
     setSorting(item) {
       this.sort = item.sort;
       this.direction = item.direction;
-      console.log(this.option);
       this.getIssues();
     },
     changePage(p) {
@@ -106,10 +109,7 @@ export default {
       this.$store.dispatch("getIssues", this.options);
     },
   },
-  mounted() {
-    this.getIssues();
-    this.$store.dispatch("getIssueAmount");
-  },
+
   computed: {
     options() {
       return {
