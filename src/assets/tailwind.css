@@ -1,5 +1,7 @@
 @tailwind base;
 
 @tailwind components;
-
+.headerBtn {
+  @apply hover:text-gray-300;
+}
 @tailwind utilities;

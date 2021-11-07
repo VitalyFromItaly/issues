@@ -1,7 +1,7 @@
 <template>
   <span>
     <span
-      class="text-white mx-0.5 text-xs rounded-md px-1"
+      class="text-white font-bold mx-0.5 text-xs rounded-md px-1"
       :style="`background-color:#${label.color}`"
       v-for="label in labels"
       :key="label.id"

@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import MainPage from "../views/MainPage";
 import Issue from "../views/Issue";
+// import ChosenIssue from "";
 
 Vue.use(VueRouter);
 
@@ -13,7 +14,7 @@ const routes = [
   },
   {
     path: "/issue/:id",
-    name: "Issue",
+    name: "oneIssue",
     component: Issue,
   },
 ];
