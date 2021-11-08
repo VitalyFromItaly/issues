@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import MainPage from "../views/MainPage";
 import Issue from "../views/Issue";
+import NotFound from "../views/NotFound";
 // import ChosenIssue from "";
 
 Vue.use(VueRouter);
@@ -17,6 +18,7 @@ const routes = [
     name: "oneIssue",
     component: Issue,
   },
+  { path: "/:pathMatch(.*)*", component: NotFound },
 ];
 
 const router = new VueRouter({

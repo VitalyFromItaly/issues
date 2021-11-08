@@ -7,9 +7,8 @@ export default new Vuex.Store({
   state: {
     issues: null,
     openedIssues: null,
-    allIssues: 11716,
-    closedIssues: 11716,
-    state: "open",
+    allIssues: 11698,
+    // allIssues: 11717,
     issuesLoading: false,
     issue: null,
   },
@@ -32,10 +31,12 @@ export default new Vuex.Store({
         const daysClosed = getDiff(today, closed);
         const dayString = (state, daysO, daysC) => {
           if (state === "open" && daysO > 1) return `opened ${daysO} days ago`;
+          else if (state === "open" && daysO === 1) return `opened yesterday`;
           else if (state === "open" && daysO < 1)
             return `opened ${getHours(today, created)} hours ago`;
           else if (state === "closed" && daysC > 1)
             return `closed ${daysC} days ago`;
+          else if (state === "closed" && daysC === 1) return `closed yesterday`;
           else if (state === "closed" && daysO < 1)
             return `closed ${getHours(today, closed)} hours ago`;
         };
@@ -50,6 +51,8 @@ export default new Vuex.Store({
     },
     setIssue: (state, payload) => (state.issue = payload),
     cleanIssue: (state) => (state.issue = null),
+    setAllIssueAmount: (state, payload) =>
+      (state.allIssues = payload.total_count),
   },
   actions: {
     async getIssue({ commit }, id) {
@@ -62,8 +65,16 @@ export default new Vuex.Store({
     },
     async getIssueAmount({ commit }) {
       try {
-        const res = await api.get();
+        const res = await api.get("/repos/vuejs/vue");
         commit("setIssueAmount", res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getAllIssueAmount({ commit }) {
+      try {
+        const res = await api.get("/search/issues?q=repo:vuejs/vue/is:all");
+        commit("setAllIssueAmount", res.data);
       } catch (err) {
         console.log(err);
       }
@@ -72,7 +83,7 @@ export default new Vuex.Store({
       try {
         commit("setLoading", true);
         const res = await api.get(
-          `/issues?state=${data.state}&sort=${data.sort}&direction=${data.direction}&page=${data.page}&per_page=${data.perPage}`
+          `/repos/vuejs/vue/issues?state=${data.state}&sort=${data.sort}&direction=${data.direction}&page=${data.page}&per_page=${data.perPage}`
         );
         commit("setIssues", res.data);
       } catch (err) {

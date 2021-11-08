@@ -93,6 +93,7 @@ export default {
   mounted() {
     this.getIssues();
     this.$store.dispatch("getIssueAmount");
+    this.$store.dispatch("getAllIssueAmount");
   },
   methods: {
     setSorting(item) {
@@ -125,6 +126,10 @@ export default {
       return this.allIssues - this.openedIssues;
     },
     totalPages() {
+      if (this.state === "open")
+        return Math.ceil(this.openedIssues / this.perPage);
+      if (this.state === "closed")
+        return Math.ceil(this.closedIssues / this.perPage);
       return Math.ceil(this.allIssues / this.perPage);
     },
   },
